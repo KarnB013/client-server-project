@@ -27,8 +27,8 @@ char filename[100] = {'\0'};
 
 /*
  * function to receive tar file from the server
- * this functionis using read system call for reading from sockets
- * this creates a new temp.tar.gz file in client side and write content into it from socket
+ * this function is using read system call to read from sockets
+ * this creates a new temp.tar.gz file on client side and writes content into it from socket
  */
 void receive_file(int socket_fd, char *output_filename)
 {
@@ -58,7 +58,7 @@ void receive_file(int socket_fd, char *output_filename)
 }
 
 /*
- * to check if the year is leap year or not
+ * to check if the year is a leap year or not
  * used in validating date
  */
 bool isLeapYear(int user_year)
@@ -122,8 +122,8 @@ int isDateValid(char *inputDate)
 }
 
 /*
- * validating the size entered by user is correct or not
- * it should contain digits only and no other characters;
+ * validating if the size entered by user is correct or not
+ * it should contain digits only and no other characters
  */
 int isSizeValid(char *inputsize)
 {
@@ -142,8 +142,8 @@ int isSizeValid(char *inputsize)
 }
 
 /*
- * To validate the filename entered by user is correct or not
- * it should not contains '/'(forward slash) in the file name
+ * To validate if the filename entered by user is correct or not
+ * it should not contain '/'(forward slash) in the file name
  */
 int isFilenameValid(char *filename)
 {
@@ -161,7 +161,7 @@ int isFilenameValid(char *filename)
 }
 
 /*
- * Function to trim the leading and trailing white spaces in the  user input
+ * Function to trim the leading and trailing white spaces in the user input
  */
 char *trim(char *str)
 {
@@ -185,7 +185,7 @@ char *trim(char *str)
 
 /*
  * function to connect to server
- * this will be used to connect to server to ip and port number
+ * this will be used to connect to server to IP and port number
  */
 int connect_to_server(int port, char *ip_address)
 {
@@ -210,7 +210,7 @@ int connect_to_server(int port, char *ip_address)
 	}
 
 	/*
-	 * trying to connect to server, if fails, exiting from code with message
+	 * trying to connect to server, if it fails, exiting from code with appropriate message
 	 */
 	if (connect(server, (struct sockaddr *)&servAdd, sizeof(servAdd)) < 0)
 	{ // Connect()
@@ -229,9 +229,7 @@ int connect_to_server(int port, char *ip_address)
 	return 0;
 }
 
-/*
-   handling for main function*
-   */
+// handling for main function
 int main(int argc, char *argv[])
 {
 
@@ -242,7 +240,7 @@ int main(int argc, char *argv[])
 		exit(0);
 	}
 	sscanf(argv[2], "%d", &server_portNumber);
-	// after receiving ip and port number, connecting with client
+	// after receiving IP and port number, connecting with client
 	connect_to_server(server_portNumber, argv[1]);
 	if (memcmp(message, "SERVER", strlen("SERVER")) == 0)
 	{
@@ -258,12 +256,12 @@ int main(int argc, char *argv[])
 		 */
 		if (memcmp(message, "MIRROR1", strlen("MIRROR1")) == 0)
 		{
-			// updating port number to 8090 for connecting to mirror1
+			// updating port number to 8090 for connection to mirror 1
 			portNumber = mirror1_portNumber;
 		}
 		else
 		{
-			// updating port number to 8091 for connecting to mirror2
+			// updating port number to 8091 for connection to mirror 2
 			portNumber = mirror2_portNumber;
 		}
 		close(server);
@@ -276,7 +274,7 @@ int main(int argc, char *argv[])
 		memset(user_input, '\0', 1024);
 		printf("client24$ ");
 		fgets(user_input, 1024, stdin);			  // user input
-		char *trim_user_input = trim(user_input); // triming the white spaces both leading and trailing
+		char *trim_user_input = trim(user_input); // trimming the white spaces (both leading and trailing)
 		if (strlen(trim_user_input) == 0)
 			continue;
 		else if (memcmp(trim_user_input, "quitc", strlen("quitc")) == 0)
@@ -292,7 +290,7 @@ int main(int argc, char *argv[])
 			 */
 			if (memcmp(trim_user_input, "dirlist", strlen("dirlist")) == 0)
 			{
-				// validarting the user input, if more command is passed then required, printing below message
+				// validating the user input, if more commands are passed than required, printing below message
 				int count = 0, total_spaces = 0;
 				while (count < strlen(trim_user_input))
 				{
@@ -300,7 +298,7 @@ int main(int argc, char *argv[])
 						total_spaces += 1;
 					count++;
 				}
-				// if not correct input
+				// if incorrect input is entered
 				if (total_spaces > 1 || total_spaces < 1)
 				{
 					printf("	Wrong Usage, please try again!\n");
@@ -331,7 +329,7 @@ int main(int argc, char *argv[])
 					fprintf(stdout, "read() error\n");
 					exit(3);
 				}
-				// tokening the server output and printing
+				// tokenizing the server output and printing
 				char *token = strtok(buffer, "\n");
 				while (token != NULL)
 				{
@@ -342,13 +340,13 @@ int main(int argc, char *argv[])
 			/*
 			 * handling for w24fn user input
 			 * first validating the user input if it is according to the [w24fn filename]
-			 * if not correct input supplied,then asking user to input again
-			 * second, writing the user input to server and reading server ouput and printing on screen
+			 * if not correct, then asking the user to enter again
+			 * secondly, writing the user input to server and reading server ouput and printing the same on screen
 			 */
 			else if (memcmp(trim_user_input, "w24fn", strlen("w24fn")) == 0)
 			{
 
-				// validarting the user input
+				// validating the user input
 				int count = 0, total_spaces = 0;
 				while (count < strlen(trim_user_input))
 				{
@@ -370,7 +368,7 @@ int main(int argc, char *argv[])
 					printf("	Correct Usage [w24fn filename]\n");
 					continue;
 				}
-				// after validating writing it to server
+				// after validation, writing it to the server
 				write(server, trim_user_input, strlen(trim_user_input));
 				memset(message, '\0', 100);
 
@@ -384,7 +382,7 @@ int main(int argc, char *argv[])
 			}
 			/*
 			 * handling user input for w24fz command
-			 * first it validates the user input, then writes command to server and  reads a tar file from user
+			 * first it validates the user input, then writes command to server and reads a tar file
 			 * moving the tar file to w24project/ folder in the home directory
 			 */
 			else if (memcmp(trim_user_input, "w24fz", strlen("w24fz")) == 0)
@@ -431,7 +429,7 @@ int main(int argc, char *argv[])
 				// printf("AFTER WRITE\n");
 				char tarname[20] = {'\0'};
 				memcpy(tarname, "temp.tar.gz", strlen("temp.tar.gz"));
-				// receiveing the tar file
+				// receiving the tar file
 				receive_file(server, tarname);
 				system("tar -xvzf temp.tar.gz 2>/dev/null 1>/dev/null");
 				FILE *fp = fopen("empty.txt", "r");
@@ -445,7 +443,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					// if the no files are present as expected from the command, we are printing message to user
+					// if the no files are present as expected from the command, printing appropriate message
 					char c = fgetc(fp);
 					if (c == 'x')
 					{
@@ -458,7 +456,7 @@ int main(int argc, char *argv[])
 
 			/*
 			 * handling user input for w24ft command
-			 * first it validates the user input, then writes command to server and  reads a tar file from user
+			 * first it validates the user input, then writes command to server and reads a tar file
 			 * moving the tar file to w24project/ folder in the home directory
 			 */
 			else if (memcmp(trim_user_input, "w24ft", strlen("w24ft")) == 0)
@@ -496,7 +494,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					// if no files are found as expected from the command, printing the user below message
+					// if no files are found as expected from the command, printing appropriate message
 					char c = fgetc(fp);
 					if (c == 'x')
 					{
@@ -509,7 +507,7 @@ int main(int argc, char *argv[])
 
 			/*
 			 * handling user input for w24fdb command
-			 * first it validates the user input, then writes command to server and  reads a tar file from user
+			 * first it validates the user input, then writes command to server and reads a tar file
 			 * moving the tar file to w24project/ folder in the home directory
 			 */
 			else if (memcmp(trim_user_input, "w24fdb", strlen("w24fdb")) == 0)
@@ -556,7 +554,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					// if no files are found as expected from the command, printing the user below message
+					// if no files are found as expected from the command, printing appropriate message
 					char c = fgetc(fp);
 					if (c == 'x')
 					{
@@ -569,7 +567,7 @@ int main(int argc, char *argv[])
 
 			/*
 			 * handling user input for w24fda command
-			 * first it validates the user input, then writes command to server and  reads a tar file from user
+			 * first it validates the user input, then writes command to server and reads a tar file
 			 * moving the tar file to w24project/ folder in the home directory
 			 */
 			else if (memcmp(trim_user_input, "w24fda", strlen("w24fda")) == 0)
@@ -615,7 +613,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					// if no files are found as expected from the command, printing the user below message
+					// if no files are found as expected from the command, printing appropriate message
 					char c = fgetc(fp);
 					if (c == 'x')
 					{
@@ -627,7 +625,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				// if not correct input from user, printing below message and all commands
+				// if incorrect input from user, printing below message and correct usage
 				printf("	Incorrect input, please enter one of the following commands\n");
 				printf("	1. Correct Usage [dirlist -a]\n");
 				printf("	2. Correct Usage [dirlist -t]\n");

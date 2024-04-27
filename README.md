@@ -11,6 +11,8 @@ For each request by a client, server will look in ~ directory by default.
 
 Compile and run server and mirrors beforehand: ./server _port_, ./mirror1 8090, ./mirror2 8091 followed by client: ./client _IP_address_ _port_
 
+(Use _hostname -i_ to get server IP for client connection)
+
 Usage (Client commands):
 
 **dirlist -a** : returns list of folders under home directory in alphabetical order

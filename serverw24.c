@@ -1,5 +1,4 @@
 /*
-   ASP COURSE PROJECT
    SERVER
 */
 

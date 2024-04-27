@@ -1,21 +1,3 @@
-/*
- * 1. test all cases of user input
- * 2. adding comments
- * done  3. section 3, alternate server and mirror servers
- * 4. complete run
- * done 5. check date input validation and other user input validation
- * 6. update the code for socket part
- * 7. all files returned from server must be saved in a folder named w24project in home directory
- * 8. try with mulitple clients
- * done 9.  print all commands in case of wrong input
- * 10. check all the error handling part, if correct message is displayed
- * done 11. validate the size in the input w24fz
- * done 12. filename illegal characters in filename w24fz
- * 13. check size2 >= size1 in w24fz
- */
-
-/*including all required header files
- */
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>

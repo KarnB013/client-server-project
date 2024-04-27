@@ -1,4 +1,4 @@
-# client-server-project
+# Client server project
 In this project, multiple clients can request for information/files and the server fulfills that request.
 
 Server has two copies called mirror 1 (port 8090) and mirror 2 (port 8091), which are executed simultaneously with server. 
@@ -15,7 +15,7 @@ Usage (Client commands):
 
 **dirlist -t** : returns list of folders under home directory in the order in which they were created
 
-**w24fn _filename_** : returns filename, size (in bytes), date created and file permissions (first occurence in case of same name in multiple folders)
+**w24fn _filename_** : returns filename, size (in bytes), date created and file permissions (first occurence if same file in multiple folders)
 
 **w24fz _size1_ _size2_** : return an archive temp.tar.gz that contains all the files in home directory whose file-size >= _size1_ and <= _size2_
 

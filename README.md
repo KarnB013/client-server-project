@@ -9,6 +9,8 @@ First three connections will be handled by server, next three by mirror 1, next 
 
 For each request by a client, server will look in ~ directory by default.
 
+Compile and run server and mirrors beforehand: ./server _port_, ./mirror1 8090, ./mirror2 8091 followed by client: ./client _IP_address_ _port_
+
 Usage (Client commands):
 
 **dirlist -a** : returns list of folders under home directory in alphabetical order

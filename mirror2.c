@@ -1,6 +1,5 @@
 /*
-   ASP COURSE PROJECT
-   SERVER
+   Mirror 2
 */
 
 #include <stdio.h>
